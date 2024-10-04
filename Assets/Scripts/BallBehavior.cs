@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BallBehavior : MonoBehaviour
 {
@@ -22,12 +23,12 @@ public class BallBehavior : MonoBehaviour
         float dt = Time.deltaTime;
         Vector3 change = direction * speed * dt;
         transform.position += change;
-        if (transform.position.x < -6.5f)
+        if (transform.position.x < -7.5f)
         {
             direction.x = -direction.x;
             speed += 0.1f;
         }
-        if (transform.position.x > 6.5f)
+        if (transform.position.x > 7.5f)
         {
             direction.x = -direction.x;
             speed += 0.1f;
