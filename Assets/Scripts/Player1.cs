@@ -7,7 +7,7 @@ public class Player1 : MonoBehaviour
 {
     float speed = 2.5f;
     Vector2 position = new Vector2 (-6.5f, 0f);
-    Vector2 direction = new Vector2(0, 1);
+    Vector2 direction = new Vector2(1, 1);
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class Player1 : MonoBehaviour
             Vector3 change = direction * speed * dt;
             transform.position += change;
         }
-
+        
         //safty nets
         if (position.y > 4.5f)
         {
