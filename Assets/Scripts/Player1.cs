@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Player1 : MonoBehaviour
 {
-    float speed = 2.5f;
-    Vector2 position = new Vector2 (-6.5f, 0f);
-    Vector2 direction = new Vector2(1, 1);
+    float angle;
+    float speed = 5.0f;
+    static Vector2 position;
+    Vector2 direction;
+    float y;
+    float x;
+
+    public static Vector2 PrintPosition()
+    {
+        return (position);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,28 +26,34 @@ public class Player1 : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        //getting the imputs and moving the block
-        if (Input.GetKeyDown(KeyCode.W) && position.y < 4.5f)
+        x = transform.position.x;
+        y = transform.position.y;
+        position = new Vector2(x, y);
+        // Paddle movement
+        if (Input.GetKey(KeyCode.W) && transform.position.y < 3.75f)
         {
-            direction.y = 1f;
-            Vector3 change = direction * (speed + dt);
-            transform.position += change;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && position.y > -4.5f)
-        {
-            direction.y = -1f;
+            angle = 90 * Mathf.Deg2Rad;
+            direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
             Vector3 change = direction * speed * dt;
             transform.position += change;
         }
-        
-        //safty nets
-        if (position.y > 4.5f)
+
+        if (Input.GetKey(KeyCode.S) && transform.position.y > -3.75f)
         {
-            position.y = 4.5f;
+            angle = 270 * Mathf.Deg2Rad;
+            direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            Vector3 change = direction * speed * dt;
+            transform.position += change;
         }
-        if (position.y < -4.5f)
+
+        //safty net
+        if (transform.position.y > 3.75f)
         {
-            position.y = -4.5f;
+            transform.position = new Vector3(-7.1f, 3.75f);
+        }
+        if (transform.position.y < -3.75f)
+        {
+            transform.position = new Vector3(-7.1f, -3.75f);
         }
     }
 }
