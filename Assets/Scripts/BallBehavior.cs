@@ -6,13 +6,40 @@ public class BallBehavior : MonoBehaviour
 {
     float angle;
     float speed = 5.0f;
+    float Player1Score;
+    float Player2Score;
     Vector2 direction;
 
     // Start is called before the first frame update
     void Start()
     {
+        switch (Mathf.Round(Random.Range(1, 4)))
+        {
+            case 1f:
+                angle = 45;
+                break;
+            case 2f:
+                angle = 135;
+                break;
+            case 3f:
+                angle = 225;
+                break;
+            case 4f:
+                angle = 315;
+                break;
+        }
+        direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
+    // resets the ball to its starting point and changes its angle
+    void resetBall()
+    {
+        transform.position = new Vector3(0, 0);
+        speed = 5.0f;
         angle = Random.Range(1, 360) * Mathf.Deg2Rad;
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        Debug.Log("Player 1 Score: " + Player1Score);
+        Debug.Log("Player 2 Score: " + Player2Score);
     }
     
     // Update is called once per frame
@@ -22,27 +49,19 @@ public class BallBehavior : MonoBehaviour
         Vector3 change = direction * speed * dt;
         transform.position += change;
         //add a point
-        if (transform.position.x < -7.45f)
+        if (transform.position.x < -8.45f)
         {
-            direction.x = -direction.x;
-            speed += 0.1f;
-            //Player2Point++;
-            //speed = 5.0f;
-            //angle = Random.Range(1, 360) * Mathf.Deg2Rad;
-            //direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            Player2Score++;
+            resetBall();
         }
-        if (transform.position.x > 8.5f)
+        if (transform.position.x > 8.45f)
         {
-            direction.x = -direction.x;
-            speed += 0.1f;
-            //Player1Point++;
-            //speed = 5.0f;
-            //angle = Random.Range(1, 360) * Mathf.Deg2Rad;
-            //direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+            Player1Score++;
+            resetBall();
         }
 
         //Bounce off walls
-        if (transform.position.y > 8.5f)
+        if (transform.position.y > 4.5f)
         {
             direction.y = -direction.y;
             speed += 0.1f;
