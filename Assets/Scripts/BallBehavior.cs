@@ -13,19 +13,21 @@ public class BallBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        switch (Mathf.Round(Random.Range(1, 4)))
+        switch (Mathf.Round(Random.Range(1, 5)))
         {
             case 1f:
-                angle = 45;
+                angle = 27;//up and to the left
                 break;
             case 2f:
-                angle = 135;
+                angle = 29;//down and to the left
                 break;
             case 3f:
-                angle = 225;
+                angle = 37;//down and to the right 
                 break;
             case 4f:
-                angle = 315;
+                angle = 32;//up and to the right
+                break;
+            default:
                 break;
         }
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
@@ -34,9 +36,25 @@ public class BallBehavior : MonoBehaviour
     // resets the ball to its starting point and changes its angle
     void resetBall()
     {
+        switch (Mathf.Round(Random.Range(1, 5)))
+        {
+            case 1f:
+                angle = 27;//up and to the left
+                break;
+            case 2f:
+                angle = 29;//down and to the left
+                break;
+            case 3f:
+                angle = 37;//down and to the right 
+                break;
+            case 4f:
+                angle = 32;//up and to the right
+                break;
+            default:
+                break;
+        }
         transform.position = new Vector3(0, 0);
         speed = 5.0f;
-        angle = Random.Range(1, 360) * Mathf.Deg2Rad;
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         Debug.Log("Player 1 Score: " + Player1Score);
         Debug.Log("Player 2 Score: " + Player2Score);
@@ -64,6 +82,7 @@ public class BallBehavior : MonoBehaviour
         if (transform.position.y > 4.5f)
         {
             direction.y = -direction.y;
+
             speed += 0.1f;
             transform.position = new Vector3(transform.position.x, 4.5f);
         }
