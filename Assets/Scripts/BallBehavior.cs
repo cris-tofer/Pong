@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BallBehavior : MonoBehaviour
 {
+    public TMPro.TextMeshProUGUI score;
     float angle;
     float speed = 5.0f;
     float Player1Score;
@@ -58,6 +59,7 @@ public class BallBehavior : MonoBehaviour
         direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         Debug.Log("Player 1 Score: " + Player1Score);
         Debug.Log("Player 2 Score: " + Player2Score);
+        score.text = Player1Score + "      " + Player2Score;
     }
     
     // Update is called once per frame
